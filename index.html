@@ -77,13 +77,22 @@ async function draw_path()
 	let x, y;
 
 	cx.strokeStyle = "#FF0000";
+	cx.font = "12px Arial";
 
 	for (let i = 0; i < table.length - 1; i++) {
 		cx.beginPath();
 
 		[x, y] = get_coord(table[i]);
 
-		cx.fillStyle = i == 0 ?  "#00FF00" : "#FF0000";
+		if (!i) {
+			cx.fillStyle = "#000000";
+			cx.fillText(i + 1, x + 4, y + 3);
+
+			cx.fillStyle = "#00FF00";
+		} else {
+			cx.fillStyle = "#FF0000";
+		}
+
 		cx.fillRect(x - 3, y - 3, 6, 6);
 
 		cx.moveTo(x, y);
@@ -96,6 +105,9 @@ async function draw_path()
 
 		cx.fillStyle = "#00FF00";
 		cx.fillRect(x - 3, y - 3, 6, 6);
+
+		cx.fillStyle = "#000000";
+		cx.fillText(i + 2, x + 4, y + 3);
 
 		await sleep(50);
 	}
